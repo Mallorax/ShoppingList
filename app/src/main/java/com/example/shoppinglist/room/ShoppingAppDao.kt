@@ -10,7 +10,7 @@ import com.example.shoppinglist.model.dbmodel.ShoppingListEntity
 abstract class ShoppingAppDao {
 
     @Transaction
-    @Query("SELECT * FROM shopping_lists ORDER BY shopping_lists.date")
+    @Query("SELECT * FROM shopping_lists ORDER BY shopping_lists.date DESC")
     abstract fun getShoppingListAndGroceries(): DataSource.Factory<Int, ListWithGroceriesEntity>
 
     suspend fun insertGroceriesForList(shoppingListWithGroceries: ListWithGroceriesEntity){
