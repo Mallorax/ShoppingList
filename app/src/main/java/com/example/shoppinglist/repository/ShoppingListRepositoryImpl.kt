@@ -12,18 +12,21 @@ import com.example.shoppinglist.model.dbmodel.ShoppingListEntity
 import com.example.shoppinglist.room.ShoppingAppDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAppDao): ShoppingListRepository {
 
 
-    override fun loadShoppingList(): LiveData<PagingData<ShoppingList>> {
+    override fun loadShoppingList(): Flow<PagingData<ShoppingList>> {
         val daoResponse = dao.getShoppingListAndGroceries().map { mapDbShoppingListToAppShoppingList(it) }
         return Pager(
             createPagingConfig(),
             pagingSourceFactory = daoResponse.asPagingSourceFactory(Dispatchers.IO)
-        ).liveData
+        ).flow.flowOn(Dispatchers.IO)
     }
 
     private fun createPagingConfig(): PagingConfig{

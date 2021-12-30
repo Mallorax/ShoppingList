@@ -10,4 +10,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="shopping_lists">Shopping Lists</string>
+    <string name="date_picker_tooltip">Pick a date</string>
+    <string name="cancel">cancel</string>
+    <string name="save">save</string>
+    <string name="shopping_list_name_hint">Shopping list name</string>
 </resources>

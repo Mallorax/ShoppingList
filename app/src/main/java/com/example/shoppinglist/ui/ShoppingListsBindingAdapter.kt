@@ -7,6 +7,6 @@ import java.util.*
 
 @BindingAdapter("shoppingListDate")
 fun dateBindingAdapter(textView: TextView, calendar: Calendar){
-    val format = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US)
+    val format = SimpleDateFormat("dd-MM-yyyy", Locale.US)
     textView.text = format.format(calendar.time)
 }

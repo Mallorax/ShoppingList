@@ -7,10 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.shoppinglist.databinding.ShoppingListsFragmentBinding
+import com.example.shoppinglist.model.appmodel.ShoppingList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ShoppingListsFragment : Fragment() {
@@ -19,7 +23,7 @@ class ShoppingListsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ShoppingListsViewModel by viewModels()
-
+    private lateinit var adapter: ShoppingListsAdapter
 
 
     override fun onCreateView(
@@ -27,14 +31,20 @@ class ShoppingListsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = ShoppingListsFragmentBinding.inflate(inflater, container, false)
-        val adapter = setupRecyclerViewAdapter()
+        adapter = setupRecyclerViewAdapter()
         val recyclerView = binding.shoppingListsRecyclerview
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
-        viewModel.shoppingList.observe(this.viewLifecycleOwner, Observer {
-            adapter.submitData(lifecycle, it)
-        })
+        binding.fab.setOnClickListener { view ->
+            showShoppingListDialog()
+        }
+        collectShoppingLists()
         return binding.root
 
     }
@@ -48,9 +58,22 @@ class ShoppingListsFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupRecyclerViewAdapter(): ShoppingListsAdapter{
-        return ShoppingListsAdapter(ShoppingListsAdapter.OnItemClickListener{ shoppingList, view ->
+    private fun setupRecyclerViewAdapter(): ShoppingListsAdapter {
+        return ShoppingListsAdapter(ShoppingListsAdapter.OnItemClickListener { shoppingList, view ->
             Snackbar.make(view, shoppingList?.listName.orEmpty(), Snackbar.LENGTH_LONG).show()
         })
+    }
+
+    private fun showShoppingListDialog() {
+        val dialog = ShoppingListDialog()
+        dialog.show(requireActivity().supportFragmentManager, "ShoppingListDialog")
+    }
+
+    private fun collectShoppingLists(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.shoppingList.collectLatest {
+                adapter.submitData(lifecycle, it)
+            }
+        }
     }
 }
