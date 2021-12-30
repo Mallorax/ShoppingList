@@ -29,6 +29,10 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
         ).flow.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun insertShoppingList(shoppingList: ShoppingList) {
+        dao.insertGroceriesForList(mapAppShoppingListToDbShoppingList(shoppingList))
+    }
+
     private fun createPagingConfig(): PagingConfig{
         return PagingConfig(
             pageSize = 10,

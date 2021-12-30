@@ -19,7 +19,7 @@ data class GroceryEntity(
     val name: String,
     val amount: Int,
     @ColumnInfo(index = true)
-    var listFkId: Int,
+    var listFkId: Int = -1,
     @PrimaryKey(autoGenerate = true)
     val groceryId: Int = 0
 )

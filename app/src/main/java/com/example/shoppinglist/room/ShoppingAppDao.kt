@@ -13,17 +13,19 @@ abstract class ShoppingAppDao {
     @Query("SELECT * FROM shopping_lists ORDER BY shopping_lists.date")
     abstract fun getShoppingListAndGroceries(): DataSource.Factory<Int, ListWithGroceriesEntity>
 
-    fun insertGroceriesForList(shoppingList: ShoppingListEntity, groceries: List<GroceryEntity>){
-        groceries.forEach {
+    suspend fun insertGroceriesForList(shoppingListWithGroceries: ListWithGroceriesEntity){
+        val listOfGroceries = shoppingListWithGroceries.groceriesList
+        val shoppingList = shoppingListWithGroceries.shoppingListEntity
+        listOfGroceries.forEach {
             it.listFkId = shoppingList.listId
         }
         _insertShoppingList(shoppingList)
-        _insertAllGroceries(groceries)
+        _insertAllGroceries(listOfGroceries)
     }
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun _insertAllGroceries(groceries: List<GroceryEntity>)
+    abstract suspend fun _insertAllGroceries(groceries: List<GroceryEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun _insertShoppingList(shoppingList: ShoppingListEntity)
+    abstract suspend fun _insertShoppingList(shoppingList: ShoppingListEntity)
 
 }
