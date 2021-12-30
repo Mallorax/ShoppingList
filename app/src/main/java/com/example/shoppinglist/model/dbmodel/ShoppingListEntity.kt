@@ -3,7 +3,7 @@ package com.example.shoppinglist.model.dbmodel
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "shopping_lists")
 data class ShoppingListEntity(
     @PrimaryKey(autoGenerate = true)
     val listId: Int,
