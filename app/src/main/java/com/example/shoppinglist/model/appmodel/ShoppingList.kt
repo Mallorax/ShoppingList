@@ -5,5 +5,6 @@ import java.util.*
 data class ShoppingList(
     val date: Calendar,
     val listName: String,
-    val groceriesList: List<Grocery>
+    val groceriesList: List<Grocery>,
+    val status: ShoppingListStatus
 )
