@@ -34,5 +34,5 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
             enablePlaceholders = false
         )
     }
-    
+
 }
