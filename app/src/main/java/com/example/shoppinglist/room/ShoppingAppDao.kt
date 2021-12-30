@@ -1,10 +1,7 @@
 package com.example.shoppinglist.room
 
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.example.shoppinglist.model.dbmodel.GroceryEntity
 import com.example.shoppinglist.model.dbmodel.ListWithGroceriesEntity
 import com.example.shoppinglist.model.dbmodel.ShoppingListEntity
@@ -23,10 +20,10 @@ abstract class ShoppingAppDao {
         _insertShoppingList(shoppingList)
         _insertAllGroceries(groceries)
     }
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun _insertAllGroceries(groceries: List<GroceryEntity>)
-    
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun _insertShoppingList(shoppingList: ShoppingListEntity)
 
 }

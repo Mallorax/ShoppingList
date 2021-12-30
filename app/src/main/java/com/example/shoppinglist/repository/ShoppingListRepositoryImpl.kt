@@ -6,8 +6,13 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.example.shoppinglist.model.appmodel.ShoppingList
+import com.example.shoppinglist.model.appmodel.ShoppingListStatus
+import com.example.shoppinglist.model.dbmodel.GroceryEntity
+import com.example.shoppinglist.model.dbmodel.ShoppingListEntity
 import com.example.shoppinglist.room.ShoppingAppDao
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAppDao): ShoppingListRepository {
@@ -29,4 +34,5 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
             enablePlaceholders = false
         )
     }
+    
 }

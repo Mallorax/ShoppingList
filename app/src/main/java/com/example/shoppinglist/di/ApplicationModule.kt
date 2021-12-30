@@ -2,6 +2,7 @@ package com.example.shoppinglist.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.shoppinglist.repository.ShoppingListRepositoryImpl
 import com.example.shoppinglist.room.ShoppingAppDao
 import com.example.shoppinglist.room.ShoppingAppDb
 import dagger.Module
@@ -21,7 +22,7 @@ class ApplicationModule {
             return Room.databaseBuilder(
                 appContext,
                 ShoppingAppDb::class.java,
-                "ShoppingAppDb"
+                "ShoppingAppDb.db"
             ).build()
         }
 
@@ -30,4 +31,5 @@ class ApplicationModule {
     fun provideShoppingAppDao(appDb: ShoppingAppDb): ShoppingAppDao{
         return appDb.shoppingAppDao()
     }
+
 }
