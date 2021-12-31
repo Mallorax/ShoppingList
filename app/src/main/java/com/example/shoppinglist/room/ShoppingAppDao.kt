@@ -14,7 +14,7 @@ abstract class ShoppingAppDao {
     abstract fun getShoppingListAndGroceries(): DataSource.Factory<Int, ListWithGroceriesEntity>
 
 
-    @Query("SELECT * FROM groceries WHERE listFkId == :listId ORDER BY name DESC")
+    @Query("SELECT * FROM groceries WHERE listFkId == :listId ORDER BY groceryId DESC")
     abstract fun getAllGroceriesForList(listId: Long): DataSource.Factory<Int, GroceryEntity>
 
     suspend fun insertGroceriesForList(shoppingListWithGroceries: ListWithGroceriesEntity){
@@ -26,6 +26,9 @@ abstract class ShoppingAppDao {
         _insertShoppingList(shoppingList)
         _insertAllGroceries(listOfGroceries)
     }
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertGrocery(grocery: GroceryEntity)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun _insertAllGroceries(groceries: List<GroceryEntity>)
 

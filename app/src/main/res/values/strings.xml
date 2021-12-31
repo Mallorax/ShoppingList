@@ -15,4 +15,6 @@
     <string name="save">save</string>
     <string name="shopping_list_name_hint">Shopping list name</string>
     <string name="list_of_groceries">List of groceries</string>
+    <string name="grocery_name">Grocery name</string>
+    <string name="grocery_quantity">Grocery quantity</string>
 </resources>

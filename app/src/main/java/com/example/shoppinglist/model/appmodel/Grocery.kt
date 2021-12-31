@@ -5,5 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 data class Grocery(
     val name: String,
-    val amount: Int
+    val amount: Int,
+    val shoppingListId: Long
 )

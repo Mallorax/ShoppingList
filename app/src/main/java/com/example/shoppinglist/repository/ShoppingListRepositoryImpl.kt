@@ -43,6 +43,10 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
         )
     }
 
+    override suspend fun saveGrocery(grocery: Grocery) {
+        dao.insertGrocery(mapAppGroceryToDbGrocery(grocery))
+    }
+
     override fun loadGroceryList(shoppingListId: Long): Flow<PagingData<Grocery>> {
         val daoResponse = dao.getAllGroceriesForList(shoppingListId).map { mapDbGroceryToAppGrocery(it) }
         return Pager(

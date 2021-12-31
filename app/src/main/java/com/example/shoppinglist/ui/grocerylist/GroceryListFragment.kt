@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -21,13 +22,13 @@ class GroceryListFragment : Fragment() {
     private var _binding: GroceriesListFragmentBinding? = null
     private val binding get() = _binding!!
     private val args: GroceryListFragmentArgs by navArgs()
-    private val viewModel: GroceryListViewModel by viewModels()
+    private val viewModel: GroceryListViewModel by activityViewModels()
     private lateinit var recyclerViewAdapter: GroceryListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = GroceriesListFragmentBinding.inflate(inflater, container, false)
 
         recyclerViewAdapter = GroceryListAdapter()
@@ -40,9 +41,11 @@ class GroceryListFragment : Fragment() {
             )
         )
 
+        binding.fabAddGrocery.setOnClickListener {
+            showAddGroceryDialog()
+        }
+
         collectGroceries(args.groceriesListId)
-
-
         return binding.root
 
     }
@@ -50,6 +53,11 @@ class GroceryListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+    }
+
+    fun showAddGroceryDialog(){
+        val dialog = GroceryCreationDialog()
+        dialog.show(requireActivity().supportFragmentManager, "GroceryCreationDialog")
     }
 
     private fun collectGroceries(listId: Long){

@@ -6,7 +6,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.shoppinglist.databinding.ListCreationDialogBinding
 import com.example.shoppinglist.model.appmodel.ShoppingList
 import com.example.shoppinglist.model.appmodel.ShoppingListStatus
@@ -19,7 +19,7 @@ class ShoppingListDialog : DialogFragment() {
     private var _binding: ListCreationDialogBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ShoppingListsViewModel by viewModels()
+    private val viewModel: ShoppingListsViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
