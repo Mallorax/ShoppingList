@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="grocery"
+            type="com.example.shoppinglist.model.appmodel.Grocery" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/grocery_basket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_baseline_shopping_basket_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/grocery_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="@{grocery.name}"
+            app:layout_constraintStart_toEndOf="@+id/grocery_basket"
+            app:layout_constraintTop_toTopOf="@+id/grocery_basket"
+            tools:text="Shopping List" />
+
+        <TextView
+            android:id="@+id/grocery_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="12sp"
+            android:text="@{Integer.toString(grocery.amount)}"
+            app:layout_constraintBottom_toBottomOf="@+id/grocery_basket"
+            app:layout_constraintStart_toEndOf="@+id/grocery_basket"
+            app:layout_constraintTop_toBottomOf="@id/grocery_name"
+            tools:text="10" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

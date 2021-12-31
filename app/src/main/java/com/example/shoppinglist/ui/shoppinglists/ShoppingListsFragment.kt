@@ -1,4 +1,4 @@
-package com.example.shoppinglist.ui
+package com.example.shoppinglist.ui.shoppinglists
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.shoppinglist.databinding.ShoppingListsFragmentBinding
-import com.example.shoppinglist.model.appmodel.ShoppingList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -29,7 +28,7 @@ class ShoppingListsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = ShoppingListsFragmentBinding.inflate(inflater, container, false)
         adapter = setupRecyclerViewAdapter()
         val recyclerView = binding.shoppingListsRecyclerview
@@ -41,16 +40,12 @@ class ShoppingListsFragment : Fragment() {
             )
         )
 
-        binding.fab.setOnClickListener { view ->
+        binding.fabAddShoppingList.setOnClickListener {
             showShoppingListDialog()
         }
         collectShoppingLists()
         return binding.root
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
@@ -60,7 +55,11 @@ class ShoppingListsFragment : Fragment() {
 
     private fun setupRecyclerViewAdapter(): ShoppingListsAdapter {
         return ShoppingListsAdapter(ShoppingListsAdapter.OnItemClickListener { shoppingList, view ->
-            Snackbar.make(view, shoppingList?.listName.orEmpty(), Snackbar.LENGTH_LONG).show()
+            if (shoppingList != null){
+                val action = ShoppingListsFragmentDirections
+                    .actionShoppingListsFragmentToGroceriesListFragment(shoppingList)
+                view.findNavController().navigate(action)
+            }
         })
     }
 

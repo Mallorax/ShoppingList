@@ -14,4 +14,5 @@
     <string name="cancel">cancel</string>
     <string name="save">save</string>
     <string name="shopping_list_name_hint">Shopping list name</string>
+    <string name="list_of_groceries">List of groceries</string>
 </resources>

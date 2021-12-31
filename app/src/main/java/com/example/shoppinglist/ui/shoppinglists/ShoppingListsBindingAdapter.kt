@@ -1,4 +1,4 @@
-package com.example.shoppinglist.ui
+package com.example.shoppinglist.ui.shoppinglists
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

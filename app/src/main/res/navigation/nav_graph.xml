@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/shopping_lists_fragment"
-        android:name="com.example.shoppinglist.ui.ShoppingListsFragment"
+        android:name="com.example.shoppinglist.ui.shoppinglists.ShoppingListsFragment"
         android:label="@string/shopping_lists"
         tools:layout="@layout/shopping_lists_fragment">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_shoppingListsFragment_to_groceriesListFragment"
+            app:destination="@id/groceries_list_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.shoppinglist.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/groceries_list_fragment"
+        android:name="com.example.shoppinglist.ui.grocerylist.GroceryListFragment"
+        android:label="@string/list_of_groceries"
+        tools:layout="@layout/grocery_list">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/shopping_lists_fragment" />
+        <argument
+            android:name="groceriesList"
+            app:argType="com.example.shoppinglist.model.appmodel.ShoppingList"/>
     </fragment>
 </navigation>
