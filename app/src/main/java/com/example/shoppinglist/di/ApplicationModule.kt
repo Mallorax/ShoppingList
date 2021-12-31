@@ -23,7 +23,8 @@ class ApplicationModule {
                 appContext,
                 ShoppingAppDb::class.java,
                 "ShoppingAppDb.db"
-            ).build()
+            )
+                .fallbackToDestructiveMigration().build()
         }
 
     @Provides

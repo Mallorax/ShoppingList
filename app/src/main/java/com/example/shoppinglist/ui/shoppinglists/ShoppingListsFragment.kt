@@ -57,7 +57,7 @@ class ShoppingListsFragment : Fragment() {
         return ShoppingListsAdapter(ShoppingListsAdapter.OnItemClickListener { shoppingList, view ->
             if (shoppingList != null){
                 val action = ShoppingListsFragmentDirections
-                    .actionShoppingListsFragmentToGroceriesListFragment(shoppingList)
+                    .actionShoppingListsFragmentToGroceriesListFragment(shoppingList.creation)
                 view.findNavController().navigate(action)
             }
         })

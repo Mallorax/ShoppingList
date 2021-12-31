@@ -18,7 +18,8 @@ fun mapDbShoppingListToAppShoppingList(shoppingListDb: ListWithGroceriesEntity):
     return ShoppingList(date,
         shoppingListDb.shoppingListEntity.listName,
         groceries,
-        status)
+        status,
+        shoppingListDb.shoppingListEntity.listId)
 }
 
 fun mapAppShoppingListToDbShoppingList(shoppingList: ShoppingList): ListWithGroceriesEntity{
@@ -27,14 +28,14 @@ fun mapAppShoppingListToDbShoppingList(shoppingList: ShoppingList): ListWithGroc
     return ListWithGroceriesEntity(shoppingListDb, groceriesListDb)
 }
 
-private fun mapDbGroceryToAppGrocery(grocery: GroceryEntity): Grocery {
+fun mapDbGroceryToAppGrocery(grocery: GroceryEntity): Grocery {
     return Grocery(
         grocery.name,
         grocery.amount
     )
 }
 
-private fun mapAppGroceryToDbGrocery(grocery: Grocery): GroceryEntity{
+fun mapAppGroceryToDbGrocery(grocery: Grocery): GroceryEntity{
     return GroceryEntity(grocery.name, grocery.amount)
 }
 

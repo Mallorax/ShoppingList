@@ -13,6 +13,10 @@ abstract class ShoppingAppDao {
     @Query("SELECT * FROM shopping_lists ORDER BY shopping_lists.date DESC")
     abstract fun getShoppingListAndGroceries(): DataSource.Factory<Int, ListWithGroceriesEntity>
 
+
+    @Query("SELECT * FROM groceries WHERE listFkId == :listId ORDER BY name DESC")
+    abstract fun getAllGroceriesForList(listId: Long): DataSource.Factory<Int, GroceryEntity>
+
     suspend fun insertGroceriesForList(shoppingListWithGroceries: ListWithGroceriesEntity){
         val listOfGroceries = shoppingListWithGroceries.groceriesList
         val shoppingList = shoppingListWithGroceries.shoppingListEntity

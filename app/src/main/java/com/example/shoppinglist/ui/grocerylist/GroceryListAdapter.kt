@@ -2,6 +2,7 @@ package com.example.shoppinglist.ui.grocerylist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,11 +10,13 @@ import com.example.shoppinglist.databinding.GroceriesListItemBinding
 import com.example.shoppinglist.model.appmodel.Grocery
 import com.example.shoppinglist.model.appmodel.ShoppingList
 
-class GroceryListAdapter(): ListAdapter<Grocery, GroceryListAdapter.GroceryListVH>(DiffCallback){
+class GroceryListAdapter(): PagingDataAdapter<Grocery, GroceryListAdapter.GroceryListVH>(DiffCallback){
 
     override fun onBindViewHolder(holder: GroceryListVH, position: Int) {
         val shoppingList = getItem(position)
-        holder.bind(shoppingList)
+        if (shoppingList != null) {
+            holder.bind(shoppingList)
+        }
     }
 
     override fun onCreateViewHolder(

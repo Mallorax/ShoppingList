@@ -5,6 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
+import com.example.shoppinglist.model.appmodel.Grocery
 import com.example.shoppinglist.model.appmodel.ShoppingList
 import com.example.shoppinglist.model.appmodel.ShoppingListStatus
 import com.example.shoppinglist.model.dbmodel.GroceryEntity
@@ -42,4 +43,11 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
         )
     }
 
+    override fun loadGroceryList(shoppingListId: Long): Flow<PagingData<Grocery>> {
+        val daoResponse = dao.getAllGroceriesForList(shoppingListId).map { mapDbGroceryToAppGrocery(it) }
+        return Pager(
+            createPagingConfig(),
+            pagingSourceFactory = daoResponse.asPagingSourceFactory(Dispatchers.IO)
+        ).flow.flowOn(Dispatchers.IO)
+    }
 }

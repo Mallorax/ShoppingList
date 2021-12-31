@@ -22,7 +22,7 @@
         tools:layout="@layout/grocery_list">
 
         <argument
-            android:name="groceriesList"
-            app:argType="com.example.shoppinglist.model.appmodel.ShoppingList"/>
+            android:name="groceriesListId"
+            app:argType="long"/>
     </fragment>
 </navigation>
