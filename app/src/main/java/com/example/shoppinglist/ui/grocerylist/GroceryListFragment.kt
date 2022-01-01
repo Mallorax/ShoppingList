@@ -31,7 +31,7 @@ class GroceryListFragment : Fragment() {
     ): View {
         _binding = GroceriesListFragmentBinding.inflate(inflater, container, false)
 
-        recyclerViewAdapter = GroceryListAdapter()
+        recyclerViewAdapter = setupRecyclerViewAdapter()
         val recyclerView = binding.groceryListRecycler
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.addItemDecoration(
@@ -55,9 +55,17 @@ class GroceryListFragment : Fragment() {
 
     }
 
-    fun showAddGroceryDialog(){
+    private fun showAddGroceryDialog(){
         val dialog = GroceryCreationDialog()
         dialog.show(requireActivity().supportFragmentManager, "GroceryCreationDialog")
+    }
+
+    private fun setupRecyclerViewAdapter(): GroceryListAdapter{
+        return GroceryListAdapter(GroceryListAdapter.OnDeleteClickListener{grocery, view ->
+            if (grocery != null) {
+                viewModel.deleteGrocery(grocery.shoppingListId)
+            }
+        })
     }
 
     private fun collectGroceries(listId: Long){

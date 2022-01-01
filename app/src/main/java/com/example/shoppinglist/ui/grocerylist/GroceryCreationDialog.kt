@@ -13,6 +13,7 @@ import com.example.shoppinglist.databinding.ListCreationDialogBinding
 import com.example.shoppinglist.model.appmodel.Grocery
 import com.example.shoppinglist.ui.shoppinglists.ShoppingListsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class GroceryCreationDialog: DialogFragment() {
@@ -35,7 +36,8 @@ class GroceryCreationDialog: DialogFragment() {
                 val grocery = Grocery(
                     binding.groceryName.editText?.text.toString(),
                     binding.groceryQuantityInputLayout.editText?.text.toString().toInt(),
-                    viewModel.shoppingListId!!
+                    viewModel.shoppingListId!!,
+                    Calendar.getInstance().timeInMillis
                 )
                 viewModel.saveGrocery(grocery)
             }

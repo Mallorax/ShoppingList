@@ -27,4 +27,10 @@ class GroceryListViewModel @Inject constructor(private val repositoryImpl: Shopp
             repositoryImpl.saveGrocery(grocery)
         }
     }
+
+    fun deleteGrocery(id: Long){
+        viewModelScope.launch(Dispatchers.IO){
+            repositoryImpl.deleteGrocery(id)
+        }
+    }
 }

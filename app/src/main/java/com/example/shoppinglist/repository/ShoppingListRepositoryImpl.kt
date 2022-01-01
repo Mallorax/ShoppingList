@@ -47,6 +47,10 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
         dao.insertGrocery(mapAppGroceryToDbGrocery(grocery))
     }
 
+    override suspend fun deleteGrocery(id: Long) {
+        dao.deleteGrocery(id)
+    }
+
     override fun loadGroceryList(shoppingListId: Long): Flow<PagingData<Grocery>> {
         val daoResponse = dao.getAllGroceriesForList(shoppingListId).map { mapDbGroceryToAppGrocery(it) }
         return Pager(

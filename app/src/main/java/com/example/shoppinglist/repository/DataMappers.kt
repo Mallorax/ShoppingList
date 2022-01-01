@@ -32,12 +32,14 @@ fun mapDbGroceryToAppGrocery(grocery: GroceryEntity): Grocery {
     return Grocery(
         grocery.name,
         grocery.amount,
-        grocery.listFkId
+        grocery.listFkId,
+        grocery.groceryId
     )
 }
 
 fun mapAppGroceryToDbGrocery(grocery: Grocery): GroceryEntity{
-    return GroceryEntity(grocery.name, grocery.amount, listFkId = grocery.shoppingListId)
+    return GroceryEntity(grocery.name, grocery.amount,
+        listFkId = grocery.shoppingListId, groceryId = grocery.shoppingListId)
 }
 
 

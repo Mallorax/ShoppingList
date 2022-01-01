@@ -10,6 +10,7 @@ interface ShoppingListRepository {
 
     fun loadShoppingList(): Flow<PagingData<ShoppingList>>
     suspend fun insertShoppingList(shoppingList: ShoppingList)
-    fun loadGroceryList(soppingListId: Long): Flow<PagingData<Grocery>>
+    fun loadGroceryList(shoppingListId: Long): Flow<PagingData<Grocery>>
     suspend fun saveGrocery(grocery: Grocery)
+    suspend fun deleteGrocery(id: Long)
 }

@@ -26,6 +26,9 @@ abstract class ShoppingAppDao {
         _insertShoppingList(shoppingList)
         _insertAllGroceries(listOfGroceries)
     }
+    @Query("DELETE FROM groceries WHERE groceryId == :id")
+    abstract suspend fun deleteGrocery(id: Long)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertGrocery(grocery: GroceryEntity)
 

@@ -22,5 +22,5 @@ data class GroceryEntity(
     val amount: Int,
     @ColumnInfo(index = true)
     var listFkId: Long = -1,
-    val groceryId: Long = Calendar.getInstance().timeInMillis
+    val groceryId: Long
 )
