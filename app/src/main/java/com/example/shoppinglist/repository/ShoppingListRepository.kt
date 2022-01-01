@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface ShoppingListRepository {
 
     fun loadShoppingList(): Flow<PagingData<ShoppingList>>
+    fun loadArchivedList(): Flow<PagingData<ShoppingList>>
     suspend fun insertShoppingList(shoppingList: ShoppingList)
     fun loadGroceryList(shoppingListId: Long): Flow<PagingData<Grocery>>
     suspend fun saveGrocery(grocery: Grocery)

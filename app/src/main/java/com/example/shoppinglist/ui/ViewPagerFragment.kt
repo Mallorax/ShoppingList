@@ -22,7 +22,7 @@ class ViewPagerFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ViewPagerFragmentBinding.inflate(inflater)
+        _binding = ViewPagerFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

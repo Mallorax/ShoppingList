@@ -2,8 +2,7 @@ package com.example.shoppinglist.ui.shoppinglists
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
-import com.example.shoppinglist.model.appmodel.ShoppingList
+import com.example.shoppinglist.ui.archivedlists.ArchivedListsFragment
 
 class ShoppingListsPagerAdapter(val fragment: Fragment): FragmentStateAdapter(fragment) {
 
@@ -11,8 +10,8 @@ class ShoppingListsPagerAdapter(val fragment: Fragment): FragmentStateAdapter(fr
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            1 -> ShoppingListsFragment()
-            else -> ShoppingListsFragment()
+            0 -> ShoppingListsFragment()
+            else -> ArchivedListsFragment()
         }
     }
 }

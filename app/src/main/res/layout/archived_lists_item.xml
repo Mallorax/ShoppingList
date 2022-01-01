@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="shoppingList"
+            name="archivedList"
             type="com.example.shoppinglist.model.appmodel.ShoppingList" />
     </data>
 
@@ -17,7 +17,7 @@
         android:paddingBottom="16dp">
 
         <ImageView
-            android:id="@+id/shopping_list_cart"
+            android:id="@+id/archived_list_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -27,38 +27,28 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/shopping_list_name"
+            android:id="@+id/archived_list_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textStyle="bold"
-            android:text="@{shoppingList.status.toString()}"
-            app:layout_constraintStart_toEndOf="@+id/shopping_list_cart"
-            app:layout_constraintTop_toTopOf="@+id/shopping_list_cart"
+            android:text="@{archivedList.listName}"
+            app:layout_constraintStart_toEndOf="@+id/archived_list_cart"
+            app:layout_constraintTop_toTopOf="@+id/archived_list_cart"
             tools:text="Shopping List" />
 
         <TextView
-            android:id="@+id/shopping_list_date"
+            android:id="@+id/archived_list_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textSize="12sp"
-            app:shoppingListDate="@{shoppingList.date}"
-            app:layout_constraintBottom_toBottomOf="@+id/shopping_list_cart"
-            app:layout_constraintStart_toEndOf="@+id/shopping_list_cart"
-            app:layout_constraintTop_toBottomOf="@id/shopping_list_name"
+            app:shoppingListDate="@{archivedList.date}"
+            app:layout_constraintBottom_toBottomOf="@+id/archived_list_cart"
+            app:layout_constraintStart_toEndOf="@+id/archived_list_cart"
+            app:layout_constraintTop_toBottomOf="@id/archived_list_name"
             tools:text="21/06/2021" />
 
-        <ImageView
-            android:id="@+id/archive_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/selectableItemBackground"
-            android:src="@drawable/ic_baseline_delete_24"
-            app:layout_constraintBottom_toBottomOf="@+id/shopping_list_cart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/shopping_list_cart" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

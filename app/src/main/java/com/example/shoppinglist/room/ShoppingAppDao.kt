@@ -13,6 +13,11 @@ abstract class ShoppingAppDao {
     @Query("SELECT * FROM shopping_lists WHERE status == 'current' ORDER BY shopping_lists.date DESC")
     abstract fun getShoppingListAndGroceries(): DataSource.Factory<Int, ListWithGroceriesEntity>
 
+    @Transaction
+    @Query("SELECT * FROM shopping_lists WHERE status == 'archived' ORDER BY shopping_lists.date DESC")
+    abstract fun getArchivedListAndGroceries(): DataSource.Factory<Int, ListWithGroceriesEntity>
+
+
 
     @Query("SELECT * FROM groceries WHERE listFkId == :listId ORDER BY groceryId DESC")
     abstract fun getAllGroceriesForList(listId: Long): DataSource.Factory<Int, GroceryEntity>

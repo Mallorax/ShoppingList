@@ -70,7 +70,7 @@ class GroceryListFragment : Fragment() {
 
     private fun collectGroceries(listId: Long){
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.loadGroceries(listId).collect {
+            viewModel.loadGroceries(listId).collectLatest {
                 recyclerViewAdapter.submitData(lifecycle, it)
             }
         }
