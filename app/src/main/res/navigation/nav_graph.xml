@@ -3,7 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/shopping_lists_fragment">
+    app:startDestination="@id/viewpager_fragment">
+
+    <fragment
+        android:id="@+id/viewpager_fragment"
+        android:name="com.example.shoppinglist.ui.ViewPagerFragment" >
+
+        <action
+            android:id="@+id/action_shoppingListsFragment_to_groceriesListFragment"
+            app:destination="@id/groceries_list_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/shopping_lists_fragment"
@@ -11,9 +20,6 @@
         android:label="@string/shopping_lists"
         tools:layout="@layout/shopping_lists_fragment">
 
-        <action
-            android:id="@+id/action_shoppingListsFragment_to_groceriesListFragment"
-            app:destination="@id/groceries_list_fragment" />
     </fragment>
     <fragment
         android:id="@+id/groceries_list_fragment"

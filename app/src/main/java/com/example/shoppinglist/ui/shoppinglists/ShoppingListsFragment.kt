@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.shoppinglist.databinding.ShoppingListsFragmentBinding
 import com.example.shoppinglist.model.appmodel.ShoppingList
+import com.example.shoppinglist.ui.ViewPagerFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -58,7 +59,7 @@ class ShoppingListsFragment : Fragment() {
     private fun setupRecyclerViewAdapter(): ShoppingListsAdapter {
         return ShoppingListsAdapter(ShoppingListsAdapter.OnItemClickListener { shoppingList, view ->
             if (shoppingList != null){
-                val action = ShoppingListsFragmentDirections
+                val action = ViewPagerFragmentDirections
                     .actionShoppingListsFragmentToGroceriesListFragment(shoppingList.creation)
                 view.findNavController().navigate(action)
             }
