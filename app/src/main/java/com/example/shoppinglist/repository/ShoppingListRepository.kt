@@ -13,4 +13,5 @@ interface ShoppingListRepository {
     fun loadGroceryList(shoppingListId: Long): Flow<PagingData<Grocery>>
     suspend fun saveGrocery(grocery: Grocery)
     suspend fun deleteGrocery(id: Long)
+    suspend fun updateShoppingList(shoppingList: ShoppingList)
 }

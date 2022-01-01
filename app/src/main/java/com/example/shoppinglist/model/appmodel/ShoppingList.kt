@@ -8,6 +8,6 @@ data class ShoppingList(
     val date: Calendar,
     val listName: String,
     val groceriesList: List<Grocery>,
-    val status: ShoppingListStatus,
+    var status: ShoppingListStatus,
     val creation: Long = Calendar.getInstance().timeInMillis
 )

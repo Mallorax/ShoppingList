@@ -49,5 +49,16 @@
             app:layout_constraintTop_toBottomOf="@id/shopping_list_name"
             tools:text="21/06/2021" />
 
+        <ImageView
+            android:id="@+id/archive_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_baseline_delete_24"
+            app:layout_constraintBottom_toBottomOf="@+id/shopping_list_cart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shopping_list_cart" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -43,6 +43,11 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
         )
     }
 
+    override suspend fun updateShoppingList(shoppingList: ShoppingList) {
+        val shoppingListEntity = mapShoppingListToShoppingListEntity(shoppingList)
+        dao.updateShoppingList(shoppingListEntity)
+    }
+
     override suspend fun saveGrocery(grocery: Grocery) {
         dao.insertGrocery(mapAppGroceryToDbGrocery(grocery))
     }

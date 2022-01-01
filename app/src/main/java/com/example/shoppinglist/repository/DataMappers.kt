@@ -11,21 +11,36 @@ import java.util.*
 fun mapDbShoppingListToAppShoppingList(shoppingListDb: ListWithGroceriesEntity): ShoppingList {
     val date = convertLongToCalendar(shoppingListDb.shoppingListEntity.date)
     val groceries = shoppingListDb.groceriesList.map { t -> mapDbGroceryToAppGrocery(t) }
-    val status = when(shoppingListDb.shoppingListEntity.status){
+    val status = when (shoppingListDb.shoppingListEntity.status) {
         "archived" -> ShoppingListStatus.ARCHIVED
         else -> ShoppingListStatus.CURRENT
     }
-    return ShoppingList(date,
+    return ShoppingList(
+        date,
         shoppingListDb.shoppingListEntity.listName,
         groceries,
         status,
-        shoppingListDb.shoppingListEntity.listId)
+        shoppingListDb.shoppingListEntity.listId
+    )
 }
 
-fun mapAppShoppingListToDbShoppingList(shoppingList: ShoppingList): ListWithGroceriesEntity{
-    val shoppingListDb = ShoppingListEntity(shoppingList.listName, shoppingList.date.timeInMillis, shoppingList.status.status)
-    val groceriesListDb = shoppingList.groceriesList.map {  mapAppGroceryToDbGrocery(it)}
+fun mapAppShoppingListToDbShoppingList(shoppingList: ShoppingList): ListWithGroceriesEntity {
+    val shoppingListDb = ShoppingListEntity(
+        shoppingList.listName,
+        shoppingList.date.timeInMillis,
+        shoppingList.status.status
+    )
+    val groceriesListDb = shoppingList.groceriesList.map { mapAppGroceryToDbGrocery(it) }
     return ListWithGroceriesEntity(shoppingListDb, groceriesListDb)
+}
+
+fun mapShoppingListToShoppingListEntity(shoppingList: ShoppingList): ShoppingListEntity {
+    return ShoppingListEntity(
+        shoppingList.listName,
+        shoppingList.date.timeInMillis,
+        shoppingList.status.status,
+        shoppingList.creation
+    )
 }
 
 fun mapDbGroceryToAppGrocery(grocery: GroceryEntity): Grocery {
@@ -37,13 +52,15 @@ fun mapDbGroceryToAppGrocery(grocery: GroceryEntity): Grocery {
     )
 }
 
-fun mapAppGroceryToDbGrocery(grocery: Grocery): GroceryEntity{
-    return GroceryEntity(grocery.name, grocery.amount,
-        listFkId = grocery.shoppingListId, groceryId = grocery.shoppingListId)
+fun mapAppGroceryToDbGrocery(grocery: Grocery): GroceryEntity {
+    return GroceryEntity(
+        grocery.name, grocery.amount,
+        listFkId = grocery.shoppingListId, groceryId = grocery.shoppingListId
+    )
 }
 
 
-fun convertLongToCalendar(time: Long): Calendar{
+fun convertLongToCalendar(time: Long): Calendar {
     val cal = Calendar.getInstance()
     cal.timeInMillis = time
     return cal

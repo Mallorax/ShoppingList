@@ -10,13 +10,17 @@ import com.example.shoppinglist.databinding.ShoppingListsItemBinding
 import com.example.shoppinglist.databinding.ShoppingListsItemBindingImpl
 import com.example.shoppinglist.model.appmodel.ShoppingList
 
-class ShoppingListsAdapter(private val onItemClickListener: OnItemClickListener):
+class ShoppingListsAdapter(private val onItemClickListener: OnItemClickListener,
+    private val onArchiveClickListener: OnArchiveClickListener):
     PagingDataAdapter<ShoppingList, ShoppingListsAdapter.ShoppingListVH>(DiffCallback){
 
     override fun onBindViewHolder(holder: ShoppingListVH, position: Int) {
         val shoppingList = getItem(position)
         holder.binding.root.setOnClickListener{
             onItemClickListener.onItemClick(shoppingList, it)
+        }
+        holder.binding.archiveImageView.setOnClickListener {
+            onArchiveClickListener.onArchiveClick(shoppingList, it)
         }
         holder.bind(shoppingList)
     }
@@ -50,5 +54,9 @@ class ShoppingListsAdapter(private val onItemClickListener: OnItemClickListener)
 
     class OnItemClickListener(val clickListener: (shoppingList: ShoppingList?, view: View) -> Unit){
         fun onItemClick(shoppingList: ShoppingList?, view: View) = clickListener(shoppingList, view)
+    }
+
+    class OnArchiveClickListener(val archiveClickListener: (shoppingList: ShoppingList?, view: View) -> Unit){
+        fun onArchiveClick(shoppingList: ShoppingList?, view: View) = archiveClickListener(shoppingList, view)
     }
 }

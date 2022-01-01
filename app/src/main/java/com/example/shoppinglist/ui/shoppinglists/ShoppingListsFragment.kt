@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.shoppinglist.databinding.ShoppingListsFragmentBinding
+import com.example.shoppinglist.model.appmodel.ShoppingList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -60,6 +61,10 @@ class ShoppingListsFragment : Fragment() {
                 val action = ShoppingListsFragmentDirections
                     .actionShoppingListsFragmentToGroceriesListFragment(shoppingList.creation)
                 view.findNavController().navigate(action)
+            }
+        }, ShoppingListsAdapter.OnArchiveClickListener{ shoppingList, view ->
+            if (shoppingList != null){
+                viewModel.archiveShoppingList(shoppingList)
             }
         })
     }

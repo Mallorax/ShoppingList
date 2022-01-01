@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.shoppinglist.model.appmodel.ShoppingList
+import com.example.shoppinglist.model.appmodel.ShoppingListStatus
 import com.example.shoppinglist.repository.ShoppingListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +19,13 @@ class ShoppingListsViewModel @Inject constructor(val repository: ShoppingListRep
     fun saveShoppingList(shoppingList: ShoppingList){
         viewModelScope.launch(Dispatchers.IO){
             repository.insertShoppingList(shoppingList)
+        }
+    }
+
+    fun archiveShoppingList(shoppingList: ShoppingList){
+        viewModelScope.launch(Dispatchers.IO){
+            shoppingList.status = ShoppingListStatus.ARCHIVED
+            repository.updateShoppingList(shoppingList)
         }
     }
 
