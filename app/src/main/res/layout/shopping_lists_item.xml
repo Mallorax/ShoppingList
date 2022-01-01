@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textStyle="bold"
-            android:text="@{shoppingList.status.toString()}"
+            android:text="@{shoppingList.listName}"
             app:layout_constraintStart_toEndOf="@+id/shopping_list_cart"
             app:layout_constraintTop_toTopOf="@+id/shopping_list_cart"
             tools:text="Shopping List" />

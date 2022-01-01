@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -25,11 +26,20 @@ class GroceryListFragment : Fragment() {
     private val viewModel: GroceryListViewModel by activityViewModels()
     private lateinit var recyclerViewAdapter: GroceryListAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = GroceriesListFragmentBinding.inflate(inflater, container, false)
+        viewModel.isListArchived(args.groceriesListId).observe(viewLifecycleOwner, Observer { archived ->
+            if (archived){
+                binding.fabAddGrocery.visibility = View.INVISIBLE
+            }else{
+                binding.fabAddGrocery.visibility = View.VISIBLE
+            }
+            recyclerViewAdapter.isArchived = archived
+        })
 
         recyclerViewAdapter = setupRecyclerViewAdapter()
         val recyclerView = binding.groceryListRecycler
@@ -44,6 +54,8 @@ class GroceryListFragment : Fragment() {
         binding.fabAddGrocery.setOnClickListener {
             showAddGroceryDialog()
         }
+
+
 
         collectGroceries(args.groceriesListId)
         return binding.root

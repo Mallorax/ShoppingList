@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.example.shoppinglist.model.appmodel.Grocery
 import com.example.shoppinglist.model.appmodel.ShoppingList
+import com.example.shoppinglist.model.appmodel.ShoppingListStatus
 import kotlinx.coroutines.flow.Flow
 
 interface ShoppingListRepository {
@@ -15,4 +16,5 @@ interface ShoppingListRepository {
     suspend fun saveGrocery(grocery: Grocery)
     suspend fun deleteGrocery(id: Long)
     suspend fun updateShoppingList(shoppingList: ShoppingList)
+    suspend fun getShoppingListStatus(id: Long): ShoppingListStatus
 }

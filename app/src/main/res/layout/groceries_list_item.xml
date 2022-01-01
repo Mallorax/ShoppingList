@@ -53,6 +53,7 @@
             android:id="@+id/delete_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_baseline_delete_24"

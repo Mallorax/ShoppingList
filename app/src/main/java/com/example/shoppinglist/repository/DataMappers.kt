@@ -11,10 +11,7 @@ import java.util.*
 fun mapDbShoppingListToAppShoppingList(shoppingListDb: ListWithGroceriesEntity): ShoppingList {
     val date = convertLongToCalendar(shoppingListDb.shoppingListEntity.date)
     val groceries = shoppingListDb.groceriesList.map { t -> mapDbGroceryToAppGrocery(t) }
-    val status = when (shoppingListDb.shoppingListEntity.status) {
-        "archived" -> ShoppingListStatus.ARCHIVED
-        else -> ShoppingListStatus.CURRENT
-    }
+    val status = mapStringToShoppingListStatus(shoppingListDb.shoppingListEntity.status)
     return ShoppingList(
         date,
         shoppingListDb.shoppingListEntity.listName,
@@ -22,6 +19,13 @@ fun mapDbShoppingListToAppShoppingList(shoppingListDb: ListWithGroceriesEntity):
         status,
         shoppingListDb.shoppingListEntity.listId
     )
+}
+
+fun mapStringToShoppingListStatus(status: String): ShoppingListStatus{
+    return when (status) {
+        "archived" -> ShoppingListStatus.ARCHIVED
+        else -> ShoppingListStatus.CURRENT
+    }
 }
 
 fun mapAppShoppingListToDbShoppingList(shoppingList: ShoppingList): ListWithGroceriesEntity {

@@ -38,6 +38,10 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
         ).flow.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun getShoppingListStatus(id: Long): ShoppingListStatus {
+        return mapStringToShoppingListStatus(dao.getShoppingList(id).status)
+    }
+
     override suspend fun insertShoppingList(shoppingList: ShoppingList) {
         dao.insertGroceriesForList(mapAppShoppingListToDbShoppingList(shoppingList))
     }

@@ -46,6 +46,8 @@ class ShoppingListsFragment : Fragment() {
         binding.fabAddShoppingList.setOnClickListener {
             showShoppingListDialog()
         }
+        binding.fabAddShoppingList.visibility = View.VISIBLE
+
         collectShoppingLists()
         return binding.root
 

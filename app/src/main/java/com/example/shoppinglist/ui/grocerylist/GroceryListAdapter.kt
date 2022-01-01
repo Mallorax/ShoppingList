@@ -12,12 +12,19 @@ import com.example.shoppinglist.model.appmodel.Grocery
 class GroceryListAdapter(private val onDeleteClickListener: OnDeleteClickListener):
     PagingDataAdapter<Grocery, GroceryListAdapter.GroceryListVH>(DiffCallback){
 
+    var isArchived = false
+
     override fun onBindViewHolder(holder: GroceryListVH, position: Int) {
         val grocery = getItem(position)
         if (grocery != null) {
             holder.bind(grocery)
             holder.binding.deleteImage.setOnClickListener {
                 onDeleteClickListener.onDeleteImageClick(grocery, it)
+            }
+            if (!isArchived){
+                holder.binding.deleteImage.visibility = View.VISIBLE
+            }else{
+                holder.binding.deleteImage.visibility = View.INVISIBLE
             }
         }
     }
