@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ViewPagerFragmentBinding
 import com.example.shoppinglist.ui.shoppinglists.ShoppingListsPagerAdapter
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ViewPagerFragment: Fragment() {
 
     private lateinit var _binding: ViewPagerFragmentBinding
     private val binding get() = _binding
-    private lateinit var adapter: ShoppingListsPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +32,15 @@ class ViewPagerFragment: Fragment() {
         val adapter = ShoppingListsPagerAdapter(this)
         pager.adapter = adapter
         TabLayoutMediator(tabLayout, pager){ tab, postition ->
-            tab.text = postition.toString()
+            when(postition){
+                0 -> {
+                    tab.text = getString(R.string.shopping_lists)
+                    tab.icon = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_baseline_format_list_bulleted_24)
+                }else -> {
+                tab.text = getString(R.string.archive)
+                tab.icon = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_baseline_archive_24)
+                }
+            }
         }.attach()
     }
 }

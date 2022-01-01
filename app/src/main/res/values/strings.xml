@@ -17,4 +17,5 @@
     <string name="list_of_groceries">List of groceries</string>
     <string name="grocery_name">Grocery name</string>
     <string name="grocery_quantity">Grocery quantity</string>
+    <string name="archive">Archive</string>
 </resources>

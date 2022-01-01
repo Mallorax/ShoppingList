@@ -9,6 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/app_bar_layout"
         android:theme="@style/Theme.ShoppingList.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
