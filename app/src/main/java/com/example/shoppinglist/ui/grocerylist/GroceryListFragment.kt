@@ -83,7 +83,7 @@ class GroceryListFragment : Fragment() {
     private fun setupRecyclerViewAdapter(): GroceryListAdapter{
         return GroceryListAdapter(GroceryListAdapter.OnDeleteClickListener{grocery, view ->
             if (grocery != null) {
-                viewModel.deleteGrocery(grocery.shoppingListId)
+                viewModel.deleteGrocery(grocery.groceryId)
             }
         })
     }
