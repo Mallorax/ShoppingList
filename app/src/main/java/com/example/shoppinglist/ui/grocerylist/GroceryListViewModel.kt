@@ -18,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GroceryListViewModel @Inject constructor(private val repositoryImpl: ShoppingListRepositoryImpl) :
     ViewModel() {
+
     var shoppingListId: Long? = null
 
     fun loadGroceries(shoppingListId: Long): Flow<PagingData<Grocery>> {

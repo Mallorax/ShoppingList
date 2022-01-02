@@ -23,7 +23,7 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
 
 
     override fun loadShoppingList(): Flow<PagingData<ShoppingList>> {
-        val daoResponse = dao.getShoppingListAndGroceries().map { mapDbShoppingListToAppShoppingList(it) }
+        val daoResponse = dao.getShoppingListAndGroceries().map { mapShoppingListEntityToShoppingList(it)  }
         return Pager(
             createPagingConfig(),
             pagingSourceFactory = daoResponse.asPagingSourceFactory(Dispatchers.IO)
@@ -31,7 +31,7 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
     }
 
     override fun loadArchivedList(): Flow<PagingData<ShoppingList>> {
-        val daoResponse = dao.getArchivedListAndGroceries().map { mapDbShoppingListToAppShoppingList(it) }
+        val daoResponse = dao.getArchivedListAndGroceries().map { mapShoppingListEntityToShoppingList(it) }
         return Pager(
             createPagingConfig(),
             pagingSourceFactory = daoResponse.asPagingSourceFactory(Dispatchers.IO)
@@ -43,7 +43,7 @@ class ShoppingListRepositoryImpl @Inject constructor(private val dao: ShoppingAp
     }
 
     override suspend fun insertShoppingList(shoppingList: ShoppingList) {
-        dao.insertGroceriesForList(mapAppShoppingListToDbShoppingList(shoppingList))
+        dao.insertShoppingList(mapShoppingListToShoppingListEntity(shoppingList))
     }
 
     private fun createPagingConfig(): PagingConfig{

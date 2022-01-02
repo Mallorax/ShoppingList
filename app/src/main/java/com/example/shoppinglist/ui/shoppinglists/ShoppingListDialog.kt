@@ -35,7 +35,6 @@ class ShoppingListDialog : DialogFragment() {
             val shoppingList = ShoppingList(
                 getSelectedDate(binding.datePicker),
                 binding.shoppingListName.editText?.text.toString(),
-                listOf(),
                 ShoppingListStatus.CURRENT
             )
             viewModel.saveShoppingList(shoppingList)

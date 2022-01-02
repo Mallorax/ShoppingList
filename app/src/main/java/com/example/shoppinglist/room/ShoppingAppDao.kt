@@ -3,7 +3,6 @@ package com.example.shoppinglist.room
 import androidx.paging.DataSource
 import androidx.room.*
 import com.example.shoppinglist.model.dbmodel.GroceryEntity
-import com.example.shoppinglist.model.dbmodel.ListWithGroceriesEntity
 import com.example.shoppinglist.model.dbmodel.ShoppingListEntity
 
 @Dao
@@ -11,11 +10,11 @@ abstract class ShoppingAppDao {
 
     @Transaction
     @Query("SELECT * FROM shopping_lists WHERE status == 'current' ORDER BY shopping_lists.date DESC")
-    abstract fun getShoppingListAndGroceries(): DataSource.Factory<Int, ListWithGroceriesEntity>
+    abstract fun getShoppingListAndGroceries(): DataSource.Factory<Int, ShoppingListEntity>
 
     @Transaction
     @Query("SELECT * FROM shopping_lists WHERE status == 'archived' ORDER BY shopping_lists.date DESC")
-    abstract fun getArchivedListAndGroceries(): DataSource.Factory<Int, ListWithGroceriesEntity>
+    abstract fun getArchivedListAndGroceries(): DataSource.Factory<Int, ShoppingListEntity>
 
     @Query("SELECT * FROM shopping_lists WHERE listId == :id")
     abstract suspend fun getShoppingList(id: Long): ShoppingListEntity
@@ -25,15 +24,6 @@ abstract class ShoppingAppDao {
     @Query("SELECT * FROM groceries WHERE listFkId == :listId ORDER BY groceryId DESC")
     abstract fun getAllGroceriesForList(listId: Long): DataSource.Factory<Int, GroceryEntity>
 
-    suspend fun insertGroceriesForList(shoppingListWithGroceries: ListWithGroceriesEntity){
-        val listOfGroceries = shoppingListWithGroceries.groceriesList
-        val shoppingList = shoppingListWithGroceries.shoppingListEntity
-        listOfGroceries.forEach {
-            it.listFkId = shoppingList.listId
-        }
-        _insertShoppingList(shoppingList)
-        _insertAllGroceries(listOfGroceries)
-    }
 
     @Update
     abstract suspend fun updateShoppingList(shoppingList: ShoppingListEntity)
@@ -48,6 +38,6 @@ abstract class ShoppingAppDao {
     abstract suspend fun _insertAllGroceries(groceries: List<GroceryEntity>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun _insertShoppingList(shoppingList: ShoppingListEntity)
+    abstract suspend fun insertShoppingList(shoppingList: ShoppingListEntity)
 
 }
