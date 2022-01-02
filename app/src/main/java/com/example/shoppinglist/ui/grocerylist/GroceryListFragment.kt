@@ -9,7 +9,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.shoppinglist.databinding.GroceriesListFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,8 +65,13 @@ class GroceryListFragment : Fragment() {
 
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
     }
 

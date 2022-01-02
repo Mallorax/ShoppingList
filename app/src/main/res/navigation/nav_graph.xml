@@ -7,7 +7,8 @@
 
     <fragment
         android:id="@+id/viewpager_fragment"
-        android:name="com.example.shoppinglist.ui.ViewPagerFragment" >
+        android:name="com.example.shoppinglist.ui.ViewPagerFragment"
+        android:label="@string/shopping_lists">
 
         <action
             android:id="@+id/action_shoppingListsFragment_to_groceriesListFragment"

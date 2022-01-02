@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ViewPagerFragmentBinding
 import com.example.shoppinglist.ui.shoppinglists.ShoppingListsPagerAdapter
@@ -26,7 +29,14 @@ class ViewPagerFragment: Fragment() {
         return binding.root
     }
 
+
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         val tabLayout = binding.tabLayout
         val pager = binding.pager
         val adapter = ShoppingListsPagerAdapter(this)
