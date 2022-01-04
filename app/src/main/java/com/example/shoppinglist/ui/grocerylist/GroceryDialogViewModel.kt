@@ -10,9 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.NumberFormatException
 import java.util.*
+import javax.inject.Inject
 
 @HiltViewModel
-class GroceryDialogViewModel constructor(private val repositoryImpl: ShoppingListRepositoryImpl): ViewModel() {
+class GroceryDialogViewModel @Inject constructor(private val repositoryImpl: ShoppingListRepositoryImpl): ViewModel() {
 
     val errorMessage = SingleLiveEvent<String>()
     val dismissDialog = SingleLiveEvent<Boolean>()
