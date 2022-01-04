@@ -23,10 +23,13 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class GroceryListFragment : Fragment() {
 
+    //binding
     private var _binding: GroceriesListFragmentBinding? = null
     private val binding get() = _binding!!
+
     private val args: GroceryListFragmentArgs by navArgs()
     private val viewModel: GroceryListViewModel by activityViewModels()
+
     private lateinit var recyclerViewAdapter: GroceryListAdapter
 
 
@@ -35,14 +38,15 @@ class GroceryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = GroceriesListFragmentBinding.inflate(inflater, container, false)
-        viewModel.isListArchived(args.groceriesListId).observe(viewLifecycleOwner, Observer { archived ->
-            if (archived){
-                binding.fabAddGrocery.visibility = View.INVISIBLE
-            }else{
-                binding.fabAddGrocery.visibility = View.VISIBLE
-            }
-            recyclerViewAdapter.isArchived = archived
-        })
+        viewModel.isListArchived(args.groceriesListId)
+            .observe(viewLifecycleOwner, Observer { archived ->
+                if (archived) {
+                    binding.fabAddGrocery.visibility = View.INVISIBLE
+                } else {
+                    binding.fabAddGrocery.visibility = View.VISIBLE
+                }
+                recyclerViewAdapter.isArchived = archived
+            })
 
         recyclerViewAdapter = setupRecyclerViewAdapter()
         val recyclerView = binding.groceryListRecycler
@@ -55,7 +59,7 @@ class GroceryListFragment : Fragment() {
         )
 
         binding.fabAddGrocery.setOnClickListener {
-            showAddGroceryDialog()
+            showAddGroceryDialog(args.groceriesListId)
         }
 
 
@@ -66,7 +70,6 @@ class GroceryListFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
@@ -75,20 +78,20 @@ class GroceryListFragment : Fragment() {
 
     }
 
-    private fun showAddGroceryDialog(){
-        val dialog = GroceryCreationDialog()
-        dialog.show(requireActivity().supportFragmentManager, "GroceryCreationDialog")
+    private fun showAddGroceryDialog(id: Long) {
+        val dialog = GroceryCreationDialog(id)
+        dialog.show(childFragmentManager, "GroceryCreationDialog")
     }
 
-    private fun setupRecyclerViewAdapter(): GroceryListAdapter{
-        return GroceryListAdapter(GroceryListAdapter.OnDeleteClickListener{grocery, view ->
+    private fun setupRecyclerViewAdapter(): GroceryListAdapter {
+        return GroceryListAdapter(GroceryListAdapter.OnDeleteClickListener { grocery, view ->
             if (grocery != null) {
                 viewModel.deleteGrocery(grocery.groceryId)
             }
         })
     }
 
-    private fun collectGroceries(listId: Long){
+    private fun collectGroceries(listId: Long) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loadGroceries(listId).collectLatest {
                 recyclerViewAdapter.submitData(lifecycle, it)
