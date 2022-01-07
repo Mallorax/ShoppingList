@@ -12,7 +12,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ViewPagerFragmentBinding
 import com.example.shoppinglist.ui.shoppinglists.ShoppingListsPagerAdapter
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ViewPagerFragment: Fragment() {

@@ -1,8 +1,7 @@
-package com.example.shoppinglist.ui.shoppinglists
+package com.example.shoppinglist.ui.shoppinglists.dialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
 import com.example.shoppinglist.model.appmodel.ShoppingList
 import com.example.shoppinglist.model.appmodel.ShoppingListStatus
 import com.example.shoppinglist.repository.ShoppingListRepository
@@ -13,16 +12,12 @@ import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class ShoppingListsViewModel @Inject constructor(val repository: ShoppingListRepository): ViewModel() {
+class ShoppingListDialogViewModel @Inject constructor(private val repo: ShoppingListRepository): ViewModel() {
 
-    val shoppingList = repository.loadShoppingList().cachedIn(viewModelScope)
-
-
-    fun archiveShoppingList(date: Calendar, name: String, creation: Long){
+    fun saveShoppingList(date: Calendar, name: String){
+        val shoppingList = ShoppingList(date, name, ShoppingListStatus.CURRENT, Calendar.getInstance().timeInMillis)
         viewModelScope.launch(Dispatchers.IO){
-            val shoppingList = ShoppingList(date, name, ShoppingListStatus.ARCHIVED, creation)
-            repository.updateShoppingList(shoppingList)
+            repo.insertShoppingList(shoppingList)
         }
     }
-
 }

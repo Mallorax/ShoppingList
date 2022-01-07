@@ -1,19 +1,17 @@
 package com.example.shoppinglist.ui.shoppinglists
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.shoppinglist.databinding.ShoppingListsFragmentBinding
-import com.example.shoppinglist.model.appmodel.ShoppingList
 import com.example.shoppinglist.ui.ViewPagerFragmentDirections
-import com.google.android.material.snackbar.Snackbar
+import com.example.shoppinglist.ui.shoppinglists.dialog.ShoppingListDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -67,7 +65,7 @@ class ShoppingListsFragment : Fragment() {
             }
         }, ShoppingListsAdapter.OnArchiveClickListener{ shoppingList, view ->
             if (shoppingList != null){
-                viewModel.archiveShoppingList(shoppingList)
+                viewModel.archiveShoppingList(shoppingList.date, shoppingList.listName, shoppingList.creation)
             }
         })
     }

@@ -1,4 +1,4 @@
-package com.example.shoppinglist.ui.grocerylist
+package com.example.shoppinglist.ui.grocerylist.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog

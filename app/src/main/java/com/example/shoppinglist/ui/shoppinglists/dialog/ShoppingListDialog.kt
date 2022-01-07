@@ -1,4 +1,4 @@
-package com.example.shoppinglist.ui.shoppinglists
+package com.example.shoppinglist.ui.shoppinglists.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -6,10 +6,8 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.shoppinglist.databinding.ListCreationDialogBinding
-import com.example.shoppinglist.model.appmodel.ShoppingList
-import com.example.shoppinglist.model.appmodel.ShoppingListStatus
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -19,7 +17,7 @@ class ShoppingListDialog : DialogFragment() {
     private var _binding: ListCreationDialogBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ShoppingListsViewModel by activityViewModels()
+    private val viewModel: ShoppingListDialogViewModel by viewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
@@ -32,12 +30,10 @@ class ShoppingListDialog : DialogFragment() {
             DialogInterface.OnCancelListener { dialog.cancel() }
         }
         binding.saveButton.setOnClickListener {
-            val shoppingList = ShoppingList(
+            viewModel.saveShoppingList(
                 getSelectedDate(binding.datePicker),
-                binding.shoppingListName.editText?.text.toString(),
-                ShoppingListStatus.CURRENT
+                binding.shoppingListName.editText?.text.toString()
             )
-            viewModel.saveShoppingList(shoppingList)
             dialog.dismiss()
         }
 

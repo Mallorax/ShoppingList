@@ -1,4 +1,4 @@
-package com.example.shoppinglist.ui.grocerylist
+package com.example.shoppinglist.ui.grocerylist.dialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +8,6 @@ import com.example.shoppinglist.ui.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.NumberFormatException
 import java.util.*
 import javax.inject.Inject
 

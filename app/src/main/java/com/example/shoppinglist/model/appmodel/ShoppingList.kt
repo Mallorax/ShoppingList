@@ -1,7 +1,5 @@
 package com.example.shoppinglist.model.appmodel
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 import java.util.*
 
 data class ShoppingList(
