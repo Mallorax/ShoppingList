@@ -1,7 +1,5 @@
 package com.example.shoppinglist
 
-import androidx.test.espresso.matcher.ViewMatchers.assertThat
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.shoppinglist.model.appmodel.Grocery
 import com.example.shoppinglist.model.appmodel.ShoppingList
 import com.example.shoppinglist.model.appmodel.ShoppingListStatus
@@ -9,11 +7,10 @@ import com.example.shoppinglist.model.dbmodel.GroceryEntity
 import com.example.shoppinglist.model.dbmodel.ShoppingListEntity
 import com.example.shoppinglist.repository.*
 import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.util.*
 
-@RunWith(AndroidJUnit4::class)
 class MappersTest {
 
     @Test
